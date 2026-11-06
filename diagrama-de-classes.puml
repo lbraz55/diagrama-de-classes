@@ -1,0 +1,56 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package model {
+  class Aluno {
+    - nome : String
+    - nota : double
+    + getNome() : String
+    + setNome(nome : String)
+    + getNota() : double
+    + setNota(nota : double)
+  }
+}
+
+package controller {
+  class Controlador {
+    - alunos : List<Aluno>
+    + getAlunos() : List<Aluno>
+    + cadastrar(nome : String, nota : double)
+    + editarNota(indice : int, nota : double)
+    + calcularMedia() : double
+    + carregarDados()
+    + salvarDados()
+    + iniciar()
+    + abrirLista()
+    + abrirNovoAluno(dono : Window)
+    + abrirEdicao(dono : Window, indice : int)
+  }
+}
+
+package view {
+  class TurmaFrame
+  class AlunoFrame
+  class CadastroeditarMenuItemFrame {
+    + atualizarDados()
+  }
+}
+
+package console {
+  class CadastroAlunos
+}
+
+package app {
+  class Main
+}
+
+Controlador "1" o-- "*" Aluno
+TurmaFrame --> Controlador
+AlunoFrame --> Controlador
+CadastroeditarMenuItemFrame --> Controlador
+Controlador ..> TurmaFrame : cria
+Controlador ..> AlunoFrame : cria
+Controlador ..> CadastroeditarMenuItemFrame : cria
+CadastroAlunos --> Controlador
+Main --> Controlador
+@enduml
